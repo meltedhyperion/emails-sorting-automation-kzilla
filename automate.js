@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-const emailsArray = JSON.parse(fs.readFileSync('./data.json'))
+const emailsArray = JSON.parse(fs.readFileSync('data.json'))
 
 function filterAndRemoveDuplicates(emailsArray) {
     const uniqueEmails = new Set()
@@ -24,6 +24,6 @@ console.log("Start")
 
 const filteredEmails = filterAndRemoveDuplicates(emailsArray)
 
-fs.writeFileSync('filtered-emails-sets.json', JSON.stringify(filteredEmails))
+fs.writeFileSync('emails.json', JSON.stringify(filteredEmails))
 
 console.log("done")
