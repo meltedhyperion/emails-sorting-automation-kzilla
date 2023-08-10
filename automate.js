@@ -3,20 +3,17 @@ const fs = require('fs')
 const emailsArray = JSON.parse(fs.readFileSync('./data.json'))
 
 function filterAndRemoveDuplicates(emailsArray) {
-    const uniqueEmails = new Set()
+    const validEmails = new Map()
     const filteredEmails = []
-
     emailsArray.forEach(obj => {
         const email = obj.email;
-        if (email.includes('@srmist.edu.in')) {
-            uniqueEmails.add(email);
+        if(email.includes('@srmist.edu.in')) {
+            validEmails.set(email, obj.email)
         }
     })
-
-    uniqueEmails.forEach(email => {
-        filteredEmails.push({ "email": email });
+    validEmails.forEach((value, key) => {
+        filteredEmails.push({"email": key})
     })
-
     return filteredEmails
 }
 
@@ -24,6 +21,6 @@ console.log("Start")
 
 const filteredEmails = filterAndRemoveDuplicates(emailsArray)
 
-fs.writeFileSync('filtered-emails-sets.json', JSON.stringify(filteredEmails))
+fs.writeFileSync('filetered-emails-maps.json', JSON.stringify(filteredEmails))
 
 console.log("done")
